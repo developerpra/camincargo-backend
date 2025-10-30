@@ -1,0 +1,87 @@
+# Build Folders
+bin/
+obj/
+Debug/
+Release/
+x64/
+x86/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+
+# Visual Studio cache and settings
+.vs/
+.vscode/
+*.user
+*.suo
+*.userosscache
+# *.sln.docstates
+
+# Visual Studio profiler
+*.psess
+*.vsp
+*.vspx
+*.sap
+
+# Generated files
+*.log
+*.tlog
+*.tmp
+*.cache
+*.pidb
+*.svclog
+*.pdb
+*.dbmdl
+*.dbproj.schemaview
+*.obj
+
+# Test Results
+[Tt]est[Rr]esult*/
+[Bb]uild[Ll]og.*
+*.coverage
+*.coveragexml
+
+# Publish outputs
+publish/
+*.Publish.xml
+*.pubxml
+*.publishproj
+
+# NuGet packages
+*.nupkg
+*.snupkg
+**/packages/*
+!**/packages/build/
+!**/packages/repositories.config
+.nuget/
+
+# Node.js (for ASP.NET with front-end)
+node_modules/
+npm-debug.log*
+yarn-error.log
+
+# IDE/Editor settings
+.idea/
+# *.sln.iml
+*.sw?
+*.orig
+
+# OS generated files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Backup and temporary files
+*.bak
+*.old
+*.tmp
+*.temp
+~$*
+
+# Rider (JetBrains)
+.idea/
+*.DotSettings.user
+
+# Others
+_ReSharper*/
+*.resharper
+*.dotCover
