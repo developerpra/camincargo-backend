@@ -10,10 +10,12 @@ namespace ProductManagement.Application.Services
     public class ProductAppService : IProductAppService
     {
         private readonly IRepository<Product> _repositoryProduct;
+        private readonly IRepository<Category> _repositoryCategory;
 
-        public ProductAppService(IRepository<Product> repositoryProduct)
+        public ProductAppService(IRepository<Product> repositoryProduct, IRepository<Category> repositoryCategory)
         {
             _repositoryProduct = repositoryProduct;
+            _repositoryCategory = repositoryCategory;
         }
 
         public List<ProductViewModel> GetProducts()
@@ -27,7 +29,9 @@ namespace ProductManagement.Application.Services
                     Description = x.Description,
                     Price = x.Price,
                     UpdatedBy = x.UpdatedBy,
-                    UpdatedOn = x.UpdatedOn.ToString("MM/dd/yyyy")
+                    UpdatedOn = x.UpdatedOn.ToString("MM/dd/yyyy") ,
+                    CategoryId = x.CategoryId,
+                    CategoryName = x.Category != null ? x.Category.CategoryName : "NA"
                 }).ToList();
         }
 
@@ -35,6 +39,9 @@ namespace ProductManagement.Application.Services
         {
             try
             {
+                // ✅ Default category ID when not passed by UI
+                int defaultCategoryId = 1; // assuming '1' = Uncategorized or Default category
+                int categoryIdToUse = request.CategoryId > 0 ? request.CategoryId : defaultCategoryId;
                 if (!request.ID.HasValue || request.ID == 0)
                 {
                     var product = new Product
@@ -43,7 +50,8 @@ namespace ProductManagement.Application.Services
                         Description = request.Description,
                         Price = request.Price,
                         UpdatedBy = request.UpdatedBy,
-                        UpdatedOn = DateTime.UtcNow
+                        UpdatedOn = DateTime.UtcNow,
+                        CategoryId = categoryIdToUse
                     };
 
                     _repositoryProduct.Add(product);
@@ -62,7 +70,7 @@ namespace ProductManagement.Application.Services
                     product.Price = request.Price;
                     product.UpdatedBy = request.UpdatedBy;
                     product.UpdatedOn = DateTime.UtcNow;
-
+                    product.CategoryId = categoryIdToUse;
                     _repositoryProduct.Update(product);
                     _repositoryProduct.SaveChanges();
 

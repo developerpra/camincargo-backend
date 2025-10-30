@@ -31,15 +31,14 @@ namespace ProductManagement.Api.Controllers
                 var products = _productAppService.GetProducts();
 
                 if (products == null || !products.Any())
-                    return _responseHelper.CreateResponse(false, Constant.NOTFOUND, null, 404);
+                    return _responseHelper.CreateResponse(false, string.Format(Constant.NOTFOUND, "products"));
 
-                return _responseHelper.CreateResponse(true, Constant.SUCCESS, products);
-                
+                return _responseHelper.CreateResponse(true, string.Format(Constant.SUCCESS, "products"), products);
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, Constant.ERROR);
-                return _responseHelper.CreateResponse(false, Constant.ERROR, null, 500);
+                _logger.LogError(ex, string.Format(Constant.ERROR, "products"));
+                return _responseHelper.CreateResponse(false, string.Format(Constant.ERROR, "products"));
             }
         }
         [HttpPost("manage")]
@@ -48,20 +47,20 @@ namespace ProductManagement.Api.Controllers
             try
             {
                 if (request == null || string.IsNullOrWhiteSpace(request.ProductName))
-                    return _responseHelper.CreateResponse(false, Constant.INVALID, null, 400);
+                    return _responseHelper.CreateResponse(false, Constant.INVALID);
 
                 var response = _productAppService.ManageProduct(request);
                 var products = _productAppService.GetProducts();
 
                 if (!response.Success)
-                    return _responseHelper.CreateResponse(false, response.Message, products, 400);
+                    return _responseHelper.CreateResponse(false, response.Message, products);
 
-                return _responseHelper.CreateResponse(true, response.Message, products);
+                return _responseHelper.CreateResponse(true, string.Format(Constant.MANAGE_SUCCESS, "Product"), products);
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error occurred while managing product.");
-                return _responseHelper.CreateResponse(false, Constant.ERROR, null, 500);
+                _logger.LogError(ex, string.Format(Constant.ERROR, "product"));
+                return _responseHelper.CreateResponse(false, string.Format(Constant.ERROR, "product"));
             }
         }
 
@@ -73,15 +72,16 @@ namespace ProductManagement.Api.Controllers
                 var response = _productAppService.DeleteProduct(id);
                 var products = _productAppService.GetProducts();
 
-                return _responseHelper.CreateResponse(response.Success, response.Message, products);
+                if (!response.Success)
+                    return _responseHelper.CreateResponse(false, response.Message, products);
+
+                return _responseHelper.CreateResponse(true, string.Format(Constant.DELETE_SUCCESS, "Product"), products);
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error occurred while deleting product.");
-                return _responseHelper.CreateResponse(false, Constant.ERROR, null, 500);
+                _logger.LogError(ex, string.Format(Constant.ERROR, "product"));
+                return _responseHelper.CreateResponse(false, string.Format(Constant.ERROR, "product"));
             }
         }
-
-
     }
 }

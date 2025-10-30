@@ -1,17 +1,24 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ProductManagement.Application.ResponseModel;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ProductManagement.Application.Helper
 {
-    public class ResponseHelper : ControllerBase // Inherit from ControllerBase to use StatusCode method
+    public class ResponseHelper : ControllerBase
     {
-        public IActionResult CreateResponse(bool success, string message, object? data = null, int statusCode = 200)
+        public IActionResult CreateResponse(bool success, string message, object? data = null)
         {
+            int statusCode = 200;
+
+            if (!success)
+            {
+                if (message.Contains("Invalid", StringComparison.OrdinalIgnoreCase))
+                    statusCode = 400;
+                else if (message.Contains("not found", StringComparison.OrdinalIgnoreCase))
+                    statusCode = 404;
+                else if (message.Contains("error", StringComparison.OrdinalIgnoreCase))
+                    statusCode = 500;
+            }
+
             var response = new ProductResponse
             {
                 Success = success,
@@ -19,7 +26,7 @@ namespace ProductManagement.Application.Helper
                 Data = data
             };
 
-            return StatusCode(statusCode, response); // StatusCode is now accessible
+            return StatusCode(statusCode, response);
         }
     }
 }

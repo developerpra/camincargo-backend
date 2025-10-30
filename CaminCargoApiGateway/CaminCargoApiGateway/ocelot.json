@@ -38,6 +38,43 @@
       "UpstreamPathTemplate": "/api/Product/{id}",
       "UpstreamHttpMethod": [ "DELETE" ]
     },
+    // -------------------- CATEGORY ROUTES --------------------
+    {
+      "DownstreamPathTemplate": "/api/Category/list",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7291
+        }
+      ],
+      "UpstreamPathTemplate": "/api/Category/list",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/Category/manage",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7291
+        }
+      ],
+      "UpstreamPathTemplate": "/api/Category/manage",
+      "UpstreamHttpMethod": [ "POST" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/Category/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7291
+        }
+      ],
+      "UpstreamPathTemplate": "/api/Category/{id}",
+      "UpstreamHttpMethod": [ "DELETE" ]
+    },
 
     // -------------------- CUSTOMER ROUTES --------------------
     {

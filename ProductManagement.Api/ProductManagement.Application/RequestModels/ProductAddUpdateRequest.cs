@@ -7,5 +7,8 @@
         public string? Description { get; set; }
         public decimal Price { get; set; }
         public string UpdatedBy { get; set; }
+
+        // CategoryId included for linking product with category
+        public int CategoryId { get; set; }
     }
 }

@@ -8,5 +8,7 @@
         public decimal Price { get; set; }
         public string? UpdatedBy { get; set; }
         public string? UpdatedOn { get; set; }
+        public int? CategoryId { get; set; } 
+        public string? CategoryName { get; set; }
     }
 }

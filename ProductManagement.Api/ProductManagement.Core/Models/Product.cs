@@ -8,5 +8,11 @@
         public decimal Price { get; set; }
         public string UpdatedBy { get; set; }
         public DateTime UpdatedOn { get; set; }
+
+        // Foreign Key
+        public int CategoryId { get; set; }
+
+        // Navigation Property
+        public Category? Category { get; set; }
     }
 }
