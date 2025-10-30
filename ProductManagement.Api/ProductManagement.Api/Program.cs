@@ -29,6 +29,10 @@ builder.Services.AddSwaggerGen();
 // ✅ Register application and repository services here
 builder.Services.AddScoped<IProductAppService, ProductAppService>();
 builder.Services.AddScoped<IRepository<Product>, Repository<ProductContext, Product>>();
+
+builder.Services.AddScoped<ICategoryAppService, CategoryAppService>();
+builder.Services.AddScoped<IRepository<Category>, Repository<ProductContext, Category>>();
+
 builder.Services.AddScoped<ResponseHelper>();
 
 // ✅ Register EF Core DbContext
