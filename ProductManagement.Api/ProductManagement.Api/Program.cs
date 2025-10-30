@@ -33,6 +33,8 @@ builder.Services.AddScoped<IRepository<Product>, Repository<ProductContext, Prod
 builder.Services.AddScoped<ICategoryAppService, CategoryAppService>();
 builder.Services.AddScoped<IRepository<Category>, Repository<ProductContext, Category>>();
 
+
+
 builder.Services.AddScoped<ResponseHelper>();
 
 // ✅ Register EF Core DbContext
